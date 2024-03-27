@@ -1,7 +1,7 @@
 const express = require('express');
 const cors = require('cors');
 const bodyparser = require('body-parser');
-
+const fs = require('fs');
 
 const app = express();
 
@@ -55,6 +55,27 @@ app.put('/adminaccept', async (req, res) => {
 app.put('/admindelivar', async (req, res) => {
   await delivarDataByIP(req.body.ip);
   res.send( "ok");
+});
+
+app.get('/totaldelvs', async (req, res) => {
+  fs.readFile('./data.json', (err, data) => {
+    if (err) {
+      console.error('Error reading JSON file:', err);
+      return res.status(500).send('Internal Server Error');
+    }
+
+    // Parse the JSON data
+    let jsonData;
+    try {
+      jsonData = JSON.parse(data);
+    } catch (parseError) {
+      console.error('Error parsing JSON file:', parseError);
+      return res.status(500).send('Internal Server Error');
+    }
+
+    // Send the JSON data to the client
+    res.send(data.toString());
+  });
 });
 
 
