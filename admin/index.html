@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Dashboard</title>
+  <!-- Bootstrap CSS -->
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    body {
+      background-color: #069C54;
+      color: black;
+      
+    }
+    th, td {
+      color: black; /* Change text color for better visibility */
+    }
+    .table-container {
+      overflow: hidden;
+      width: 99vw;
+    }
+    .table-container table {
+      margin-right: 0;
+    }
+  </style>
+</head>
+<body>
+  <div class="container-fluid">
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-4">
+      <a class="navbar-brand" href="#">Admin Dashboard</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="#" onclick="showTable('notAcceptedOrders')">Orders not yet accepted</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#" onclick="showTable('acceptedNotDeliveredOrders')">Orders accepted but not yet delivered</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#" onclick="showTable('deliveredOrders')">Delivered Orders</a>
+          </li>
+          <li class="nav-item">
+            <button class="btn btn-outline-light" onclick="reloadPage()">Reload</button>
+          </li>
+        </ul>
+      </div>
+    </nav>
+
+    <!-- Table Container -->
+    <div class="row">
+      <div class="col-md-4" id="notAcceptedOrdersDiv">
+        <h2>Orders not yet accepted</h2>
+        <div class="table-container">
+          <table class="table table-bordered">
+            <thead>
+              <tr>
+                <th>IP</th>
+                <th>Delivery Location</th>
+                <th>Total</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody id="notAcceptedOrders">
+              <!-- Orders not yet accepted will be populated here -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="col-md-4" id="acceptedNotDeliveredOrdersDiv" style="display: none;">
+        <h2>Orders accepted but not yet delivered</h2>
+        <div class="table-container">
+          <table class="table table-bordered">
+            <thead>
+              <tr>
+                <th>IP</th>
+                <th>Delivery Location</th>
+                <th>Total</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody id="acceptedNotDeliveredOrders">
+              <!-- Orders accepted but not yet delivered will be populated here -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="col-md-4" id="deliveredOrdersDiv" style="display: none;">
+        <h2>Delivered Orders</h2>
+        <div class="table-container">
+          <table class="table table-bordered">
+            <thead>
+              <tr>
+                <th>IP</th>
+                <th>Delivery Location</th>
+                <th>Total</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody id="deliveredOrders">
+              <!-- Delivered orders will be populated here -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modal for showing order details -->
+    <div class="modal fade" id="orderDetailsModal" tabindex="-1" role="dialog" aria-labelledby="orderDetailsModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="orderDetailsModalLabel">Order Details</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body" id="orderDetailsContent">
+            <!-- Order details will be populated here -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bootstrap JS and jQuery -->
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+  <!-- Custom Script -->
+  <script>
+    function showTable(tableId) {
+      // Hide all table divs
+      document.getElementById('notAcceptedOrdersDiv').style.display = 'none';
+      document.getElementById('acceptedNotDeliveredOrdersDiv').style.display = 'none';
+      document.getElementById('deliveredOrdersDiv').style.display = 'none';
+
+      // Show the selected table div
+      document.getElementById(tableId + 'Div').style.display = 'block';
+    }
+    function reloadPage() {
+      location.reload(); // Reload the current page
+    }
+    setInterval(reloadPage, 60000);
+  </script>
+
+  <script src="./scripter.js"></script>
+  <script src="./Scripter2.js"></script>
+</body>
+</html>
