@@ -8,7 +8,7 @@
 
       // Append the link element to the head of the document
       document.head.appendChild(linkElement);
-      const response = await fetch('http://localhost:3001/admindata');
+      const response = await fetch('https://rk-icecream-server.onrender.com/admindata');
       ordersData = await response.json();
       console.log(ordersData);
       const notAcceptedOrdersTable = document.getElementById("notAcceptedOrders");
@@ -65,7 +65,7 @@
         };
         
         // Make the fetch request
-        await fetch('http://localhost:3001/adminaccept', options)
+        await fetch('https://rk-icecream-server.onrender.com/adminaccept', options)
         location.reload();
     }
 
@@ -86,7 +86,7 @@
         };
         
         // Make the fetch request
-        await fetch('http://localhost:3001/admindelivar', options)
+        await fetch('https://rk-icecream-server.onrender.com/admindelivar', options)
         location.reload();
     }
 
